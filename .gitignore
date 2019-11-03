@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/desafio/node_modules
+/desafio/.pnp
+/desafio.pnp.js
+.vscode
+# testing
+/desafio/coverage
+
+# production
+/desafio/build
+
+# misc
+/desafio/.DS_Store
+/desafio/.env.local
+/desafio/.env.development.local
+/desafio/.env.test.local
+/desafio/.env.production.local
+
+/desafio/npm-debug.log*
+/desafio/yarn-debug.log*
+/desafio/yarn-error.log*
