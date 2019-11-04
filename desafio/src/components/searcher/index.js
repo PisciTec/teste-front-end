@@ -59,6 +59,7 @@ export default class Seacher extends Component{
                                 <strong>{videos.snippet.title}</strong>
                                 <h4>{videos.snippet.channelTitle}</h4>
                                 <p>{videos.snippet.description}</p>
+                                <a href="#">DETALHES DO VIDEO</a>
                             </div>
                             
                         </article>
