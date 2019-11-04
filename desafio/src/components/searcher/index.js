@@ -5,15 +5,15 @@ import api, { API_KEY } from '../../services/api';
 import './styles.css';
 
 export default class Seacher extends Component{
-    state ={
-        videos: []
-    }
+    
+        
 //Declarando e definindo as váriaveis para o Input
     constructor(props){
         
         super(props);
         this.state = {
             value: '',
+            videos: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -31,6 +31,9 @@ export default class Seacher extends Component{
         this.setState({videos: response.data.items})
         console.log(response.data);
         console.log(this.state.videos);
+
+        const { snippet } = response.data.items;
+        console.log(snippet);
     }
     handleSubmit(event) {
         this.loadVideos();
@@ -42,11 +45,29 @@ export default class Seacher extends Component{
     }
     render(){
         return(
-            <div className= "content">
-                <form onSubmit={this.handleSubmit} className= "form-searcher">
-                    <input type ="search" className = "youtube-searcher" placeholder ="Pesquisar" value= {this.state.value} onChange = {this.handleChange}/>
-                </form> 
+            <div className="container">
+                <div className= "content">
+                    <form onSubmit={this.handleSubmit} className= "form-searcher">
+                        <input type ="search" className = "youtube-searcher" placeholder ="Pesquisar" value= {this.state.value} onChange = {this.handleChange}/>
+                    </form> 
+                </div>
+                <div className="video-list">
+                    {this.state.videos.map(videos => (
+                        <article key={videos.id.videoId}>
+                            <img alt= "thumbnail" src = {videos.snippet.thumbnails.medium.url}></img>
+                            <div className ="video-details">
+                                <strong>{videos.snippet.title}</strong>
+                                <h4>{videos.snippet.channelTitle}</h4>
+                                <p>{videos.snippet.description}</p>
+                            </div>
+                            
+                        </article>
+
+
+                    ))}
+                </div>    
             </div>
         )
-    } 
+    }
+     
 }
