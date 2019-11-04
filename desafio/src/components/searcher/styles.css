@@ -1,0 +1,25 @@
+
+.content{
+    margin-top: 13rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-searcher {
+    padding: 3rem;
+    
+   
+}
+.youtube-searcher{
+    padding: 10px;
+    width: 40vmax;
+    border-radius: 2px;
+    border: 2.5px solid #313131;
+    color: #111;
+    font-size: 20px;
+    background: url(images/icon.svg) no-repeat right 20px center;
+    background-size: 1.5rem 1.5rem;
+    background-color: #fff;
+}
