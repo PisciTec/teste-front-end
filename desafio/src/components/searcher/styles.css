@@ -52,7 +52,20 @@
      border:none;
      background-color: transparent;
  }
- .content button i{
+ .video-list article a {
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid #47067c;
+    background: none;
+    margin-top: 10px;
+    color: #47067c;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
 }
 }
  @media only screen and (max-width: 500px) {
