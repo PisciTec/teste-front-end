@@ -1,0 +1,31 @@
+.container-video {
+    display: flex;
+    margin: 50px 30px;
+}
+.video {
+    width: 560px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding-left: 40px;
+    
+}
+.video-statistics{
+    margin-right: 10px;
+    padding: 10px 0px 10px;
+}
+.video-statistics p{
+    font-size: small;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 0;
+}
+.video-statistics .channel-likes i{
+    float: right;
+    padding: 0px 10px 0px 0px;
+}
+.video-statistics h2{
+    float: right;
+    padding: 10px;
+}

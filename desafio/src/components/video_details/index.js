@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-
+import './styles.css'
 import api, { API_KEY } from '../../services/api';
 
 export default class VideoDetails extends Component{
@@ -11,6 +12,7 @@ export default class VideoDetails extends Component{
     }
     
     async componentDidMount(){
+       
         const { video_id } = this.props.video_id;
         const response = await api.get(`videos?id=${video_id}&part=snippet,statistics&key=${API_KEY}`);
 
@@ -24,14 +26,18 @@ export default class VideoDetails extends Component{
 
         console.log(this.state.snippet);
         console.log(this.state.statistics);
+    
+
     }
+
+    
     render(){
         const { video : { id }, snippet, statistics  } = this.state;
         
         return(
-            <div className="container">
+            <div className="container-video">
                 <div className= "return-page">
-                    <a href = "#"><i className="fas fa-chevron-left"></i></a>
+                    <Link to= "/"><i className="fas fa-chevron-left fa-2x"></i></Link>
                 </div>
                 <div className="video">
                     <h2>{snippet.title}</h2>
@@ -41,8 +47,8 @@ export default class VideoDetails extends Component{
                         
                             <h3>
                                 {snippet.channelTitle}
-                                <i className="fas fa-thumbs-up">{statistics.likeCount}</i>
-                                <i className="fas fa-thumbs-down">{statistics.dislikeCount}</i>                     
+                                <i className="fas fa-thumbs-up">  {statistics.likeCount}  </i>
+                                <i className="fas fa-thumbs-down">   {statistics.dislikeCount}  </i>                     
                             </h3>
                         </div>
                         <p>{snippet.description}</p>
@@ -51,6 +57,7 @@ export default class VideoDetails extends Component{
                         </h4>
 
                     </div>
+                    
                 </div>
             </div>
         )

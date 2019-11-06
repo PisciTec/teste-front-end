@@ -28,15 +28,24 @@ export default class Seacher extends Component {
         this.setState({ value: event.target.value });
     }
     //Faz a requisição na API e salva as informações em videos
+     
     loadVideos = async () => {
-        const response = await api.get(`search?part=id,snippet&maxResults=24&q=${this.state.value}&key=${API_KEY}`);
+        try{
+            const response = await api.get(`search?part=id,snippet&maxResults=24&q=${this.state.value}&key=${API_KEY}`);
 
-        this.setState({ videos: response.data.items })
-        console.log(response.data);
-        console.log(this.state.videos);
+            this.setState({ videos: response.data.items })
+            console.log(response.data);
+            console.log(this.state.videos);
 
-        const { snippet } = response.data.items;
-        console.log(snippet);
+            const { snippet } = response.data.items;
+            console.log(snippet);
+     } catch(err){
+        let videoEl = document.querySelector('div[className=video-list]')
+        let divEl = document.createElement('div')
+        divEl.appendChild(document.createTextNode('Não foi encotrado o vídeo'))
+        videoEl.appendChild(divEl);
+
+    }
     }
     loadNewVideos = async () => {
         const response = await api.get(`search?part=id,snippet&maxResults=6&q=${this.state.value}&key=${API_KEY}&pageToken=${this.state.pageToken}`);
@@ -65,7 +74,7 @@ export default class Seacher extends Component {
                         </button>
                     </form>
                 </div>
-                <div className="video-list" onWheel = {this.loadNewVideos()}>
+                <div className="video-list">
                     {this.state.videos.map(videos => (
                         <article key={videos.id.videoId}>
                             <img alt="thumbnail" src={videos.snippet.thumbnails.medium.url}></img>
