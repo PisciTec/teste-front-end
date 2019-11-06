@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Todos os códigos abaixo são possíveis de uso, mas o 'yarn start' é o código para testar o projeto. 
+
+Antes disso é necessário, digitar yarn install, na dependencia onde está o package.json, para que as dependências sejam instaladas, caso contrário, não será possível, testar a aplicação.
+
+O yarn start, também deverá ser rodado onde está o package.json, o caminho é desafio/desafio.
+
+
 ## Available Scripts
 
 In the project directory, you can run:
