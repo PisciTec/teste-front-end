@@ -19,23 +19,41 @@
     border: 2.5px solid #313131;
     color: #111;
     font-size: 20px;
-    background: url(images/icon.svg) no-repeat right 20px center;
     background-size: 1.5rem 1.5rem;
     background-color: #fff;
 }
 .video-list{
     margin: 1rem;
     margin-left: 3rem;
-
-    display: flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-grow: 1;
 }
 .video-list article{
     margin: 15px;
     justify-content: center;
     width: 30%;
-    display: inline-block;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
  }
+ .video-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+     flex-grow: 1;
+ }
+ .sobe {
+    margin-top:0.5rem;
+ }
+ .content button{
+     margin-left:20px ;
+     border:none;
+     background-color: transparent;
+ }
+ .content button i{
+}
 }
  @media only screen and (max-width: 500px) {
     .content{

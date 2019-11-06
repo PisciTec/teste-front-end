@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api = axios.create({baseURL :'https://www.googleapis.com/youtube/v3/search'})
+const api = axios.create({baseURL :'https://www.googleapis.com/youtube/v3/'})
 export const API_KEY = 'AIzaSyD8ZK8C0pjzpuJoXuuGRxBLpjFz4W9KuEU';
 
 export default api;
