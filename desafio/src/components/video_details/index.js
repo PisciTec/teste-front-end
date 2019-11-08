@@ -10,7 +10,7 @@ export default class VideoDetails extends Component{
         snippet: {},
         statistics: {},
     }
-    
+
     async componentDidMount(){
        
         const { video_id } = this.props.video_id;
@@ -22,10 +22,10 @@ export default class VideoDetails extends Component{
             statistics : response.data.items[0].statistics,
 
         })
-        console.log(response.data.items[0]);
+        //console.log(response.data.items[0]);
 
-        console.log(this.state.snippet);
-        console.log(this.state.statistics);
+        //console.log(this.state.snippet);
+       //console.log(this.state.statistics);
     
 
     }

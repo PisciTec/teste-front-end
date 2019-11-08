@@ -1,0 +1,14 @@
+                <div id="scrollableDiv" className="video-list" ref="myscroll">
+                    {this.state.videos.map(videos => (
+                        <article key={videos.id.videoId}>
+                            <img alt="thumbnail" src={videos.snippet.thumbnails.medium.url}></img>
+                            <div className="video-details">
+                                <strong>{videos.snippet.title}</strong>
+                                <h4>{videos.snippet.channelTitle}</h4>
+                                <p>{videos.snippet.description}</p>
+                                <Link to={`/video/${videos.id.videoId}`}>DETALHES DO VIDEO</Link>
+                            </div>
+                        </article>
+                    ))}
+                    </div>
+            

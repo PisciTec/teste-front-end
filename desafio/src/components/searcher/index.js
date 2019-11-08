@@ -4,11 +4,10 @@ import api, { API_KEY } from '../../services/api';
 
 import './styles.css';
 
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 
 export default class Seacher extends Component {
-
-
     //Declarando e definindo as váriaveis para o Input
     constructor(props) {
 
@@ -17,12 +16,14 @@ export default class Seacher extends Component {
             value: '',
             videos: [],
             pageToken: '',
+            isFetching: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
+    
     //Acionado na mudança do Input
     handleChange(event) {
         this.setState({ value: event.target.value });
@@ -31,28 +32,31 @@ export default class Seacher extends Component {
      
     loadVideos = async () => {
         try{
-            const response = await api.get(`search?part=id,snippet&maxResults=24&q=${this.state.value}&key=${API_KEY}`);
+            const response = await api.get(`search?part=id,snippet&maxResults=48&q=${this.state.value}&key=${API_KEY}`);
 
-            this.setState({ videos: response.data.items })
-            console.log(response.data);
-            console.log(this.state.videos);
+            this.setState({ videos: response.data.items, pageToken : response.data.nextPageToken })
+            //console.log(response.data);
+            //console.log(this.state.videos);
 
-            const { snippet } = response.data.items;
-            console.log(snippet);
+            //console.log(this.state.pageToken);
      } catch(err){
         let videoEl = document.querySelector('div[className=video-list]')
         let divEl = document.createElement('div')
         divEl.appendChild(document.createTextNode('Não foi encotrado o vídeo'))
         videoEl.appendChild(divEl);
 
-    }
-    }
-    loadNewVideos = async () => {
-        const response = await api.get(`search?part=id,snippet&maxResults=6&q=${this.state.value}&key=${API_KEY}&pageToken=${this.state.pageToken}`);
-        
-        this.setState({ videos: [...this.state.videos, ...response.data.items] });
+        }
     }
 
+    
+    
+    loadNewVideos = async () => {
+        this.setState({ isFetching: true })
+        const response = await api.get(`search?part=id,snippet&maxResults=24&q=${this.state.value}&key=${API_KEY}&pageToken=${this.state.pageToken}`);
+        //console.log('Funcionando...');
+        //console.log(response.data)
+        setTimeout(() => { this.setState({ videos: [...this.state.videos, ...response.data.items], isFetching: false, pageToken : response.data.nextPageToken }); }, 1500 );
+    }
     
     handleSubmit(event) {
         this.loadVideos();
@@ -63,19 +67,26 @@ export default class Seacher extends Component {
 
     }
     render() {
+        
         return (
             <div className="container">
                 <div className="content">
                     <form onSubmit={this.handleSubmit} className="form-searcher">
                         <input type="search" className="youtube-searcher" placeholder="Pesquisar"
-                            value={this.state.value} onChange={this.handleChange} onBlur={this.handleSubmit} />
+                            value={this.state.value} onChange={this.handleChange} />
                         <button>
                             <i className="fas fa-search fa-2x"></i>
                         </button>
                     </form>
+
                 </div>
-                <div className="video-list">
-                    {this.state.videos.map(videos => (
+                    <InfiniteScroll
+                            dataLength={this.state.videos.length}
+                            next={this.loadNewVideos}
+                            hasMore={true}
+                            loader={this.state.isFetching && <h4>Loading...</h4>}
+                        >
+                            {this.state.videos.map(videos => (
                         <article key={videos.id.videoId}>
                             <img alt="thumbnail" src={videos.snippet.thumbnails.medium.url}></img>
                             <div className="video-details">
@@ -86,7 +97,7 @@ export default class Seacher extends Component {
                             </div>
                         </article>
                     ))}
-                </div>
+                        </InfiniteScroll>
             </div>
         )
     }
